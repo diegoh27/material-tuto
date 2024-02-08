@@ -1,19 +1,22 @@
 import { Container, Typography } from "@mui/material";
 import { CardProduct } from "../components/CardProduct";
+import { BlueCard } from "../components/blueCard";
 
 export function ContentCard() {
   return (
-    <div id="content-card">
+    <div
+      id="content-card"
+      className=" min-h-[100vh] max-w-[100vw]  bg-blue-400"
+    >
       <Container
-        maxWidth="xl"
+        maxWidth="md"
         sx={{
-          width: "100%",
           backgroundColor: "#9999",
-          height: "100vh",
         }}
       >
         <Typography textAlign={"center"}>Otra seccion</Typography>
         <CardProduct />
+        <BlueCard />
       </Container>
     </div>
   );

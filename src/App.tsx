@@ -1,12 +1,19 @@
-import { Box, Button, Container, Grid } from "@mui/material";
+import { Box, Button, Grid } from "@mui/material";
 import TemporaryDrawer from "./components/drawlerMenu";
 import AttachFileIcon from "@mui/icons-material/AttachFile";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { ContentCard } from "./sections/ContentCard";
+import NavSection from "./sections/NavSection";
+// import { Navbar } from "./components/Navbar";
 
 function App() {
   const [users, setUsers] = useState<User[]>([]);
+
+  const scrollView = (id: string) => {
+    const idScroll: HTMLElement | null = document.getElementById(`${id}`);
+    idScroll?.scrollIntoView({ behavior: "smooth" });
+  };
 
   useEffect(() => {
     axios
@@ -16,36 +23,55 @@ function App() {
       .catch((error) => console.log("error", error));
   }, []);
 
-  const idScroll: HTMLElement | null = document.getElementById("content-card");
   return (
-    <Container maxWidth="xl">
-      <h1 className="text-center text-5xl font-extrabold dark:text-white">
-        APP
-      </h1>
+    <div id="home" style={{ scrollBehavior: "smooth" }}>
+      <h1 className="text-center text-5xl font-extrabold ">APP</h1>
       <Box
+        className="sticky"
         sx={{
           borderColor: "peru",
           border: 2,
           bgcolor: "#111",
           color: "white",
           p: 5,
+          // position: "sticky",
+          // top: 0,
+          zIndex: 999,
         }}
       >
         Que hermoso es MUI
         <Button
           sx={{ width: "200px" }}
           variant="contained"
-          onClick={() => idScroll?.scrollIntoView({ behavior: "smooth" })}
+          onClick={() => scrollView("content-card")}
           endIcon={
             <AttachFileIcon sx={{ color: "#023047", fontSize: "50px" }} />
           }
         >
-          MI PRIMER BOTON
+          Cards Sections
+        </Button>
+        <Button
+          sx={{ width: "200px" }}
+          variant="contained"
+          onClick={() => scrollView("nav-section")}
+          endIcon={
+            <AttachFileIcon sx={{ color: "#023047", fontSize: "50px" }} />
+          }
+        >
+          NavBar Sections
         </Button>
         <TemporaryDrawer />
       </Box>
 
-      <Grid container spacing={3} margin={"auto"}>
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          background: "salmon",
+          display: "flex",
+          justifyContent: "space-between",
+        }}
+      >
         {/* <Grid
           item
           xs={12}
@@ -89,7 +115,18 @@ function App() {
       */}
 
         {users.map((user) => (
-          <Grid key={user.id} item xs={6} sm={6} md={4} lg={4}>
+          <Grid
+            key={user.id}
+            item
+            xs={6}
+            sm={6}
+            md={4}
+            lg={4}
+            sx={{
+              margin: "0 auto",
+              textAlign: "center",
+            }}
+          >
             <h1>{user.name}</h1>
             <h2>{user.username}</h2>
             <h2>{user.address.city}</h2>
@@ -100,7 +137,8 @@ function App() {
       </Grid>
 
       <ContentCard />
-    </Container>
+      <NavSection />
+    </div>
   );
 }
 

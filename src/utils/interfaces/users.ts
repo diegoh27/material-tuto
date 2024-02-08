@@ -27,3 +27,9 @@ interface Geo {
   lat: string;
   lng: string;
 }
+
+interface NavLink {
+  id: string;
+  name: string;
+  icon: React.ReactNode;
+}

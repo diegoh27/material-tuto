@@ -5,6 +5,7 @@ import Button from "@mui/material/Button";
 
 import { Container } from "@mui/material";
 import AccordionUsage from "./acordion";
+import { NavListDraw } from "./NavListDraw";
 
 type Anchor = "top" | "left" | "bottom" | "right";
 
@@ -61,6 +62,7 @@ export default function TemporaryDrawer() {
             onClose={toggleDrawer(anchor, false)}
           >
             {list(anchor)}
+            <NavListDraw />
           </Drawer>
         </React.Fragment>
       ))}
